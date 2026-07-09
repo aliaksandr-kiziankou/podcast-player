@@ -1,5 +1,5 @@
 import {defineConfig} from 'vite';
 
-export default defineConfig({
-    base: 'podcast-player',
-});
+export default defineConfig (({ command }) => ({
+    base: command === 'build' ? '/podcast-player/' : '',
+}));
