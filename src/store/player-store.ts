@@ -1,7 +1,7 @@
 export type Episode = {
     id: string;
     title: string;
-    URL: string;
+    audioUrl: string;
 };
 
 let currentEpisode: Episode | null = null;
@@ -29,7 +29,7 @@ export function togglePlay(): void {
     notifyChanges();
 };
 
-export function getCurretnEpisode(): Episode | null {
+export function getCurrentEpisode(): Episode | null {
     return currentEpisode;
 };
 
