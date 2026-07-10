@@ -1,12 +1,10 @@
+import { renderLandingPage } from '../pages/landing/landing';
+
 export type RouteParams = Record <string, string>;
 
 export type Route = {
     path: string;
     render: (container: HTMLElement, params: RouteParams) => void | Promise<void>;
-};
-
-function renderLandingPage(container: HTMLElement) {
-    container.innerHTML = '<h1>Landing Page</h1>';
 };
 
 function renderPodcastDetailsPage(container: HTMLElement, params: RouteParams) {

@@ -7,7 +7,7 @@ export type Podcast = {
 };
 
 export type BestPodcastsResponse = {
-    podcast: Podcast[];
+    podcasts: Podcast[];
     page_number: number;
     next_page_number: number | null;
     has_next_page: boolean;
