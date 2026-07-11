@@ -14,7 +14,7 @@ export type SearchResponse = {
 
 export type PodcastDetailsResponse = {
     status: string;
-    feeds: Podcast;
+    feed: Podcast;
 };
 
 export type Episode = {

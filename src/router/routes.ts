@@ -1,4 +1,5 @@
 import { renderLandingPage } from '../pages/landing/landing';
+import { renderPodcastDetailsPage } from '../pages/podcast-details/podcast-details';
 
 export type RouteParams = Record <string, string>;
 
@@ -7,9 +8,7 @@ export type Route = {
     render: (container: HTMLElement, params: RouteParams) => void | Promise<void>;
 };
 
-function renderPodcastDetailsPage(container: HTMLElement, params: RouteParams) {
-    container.innerHTML = `<h1>Podcast Details: ${params.id}</h1>`;
-};
+
 
 function renderPlaylistPage(container: HTMLElement) {
     container.innerHTML = '<h1>Playlist Page</h1>';

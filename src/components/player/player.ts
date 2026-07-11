@@ -26,8 +26,8 @@ export function mountPlayer(): void {
         title.textContent = episode ? episode.title : 'No episode selected';
         toggleBtn.textContent = isPLaying ? '⏸' : '▶';
 
-        if (episode && audio.src !== episode.audioUrl) {
-            audio.src = episode.audioUrl;
+        if (episode && audio.src !== episode.URL) {
+            audio.src = episode.URL;
         };
 
         if(isPLaying) {

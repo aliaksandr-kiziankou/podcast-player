@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.podcast-card {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.098);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(25, 40, 53, 0.135);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.podcast-card:hover {
+    scale: 1.05;
+}
+
+.podcast-list {
+    max-width: 1280px;
+    display: flex;
+    gap: 20px 30px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.podcast-card__image {
+    width: 330px;
+    height: 330px;
+}
+
+.podcast-header__image {
+    width: 500px;
+    height: 500px;
+}

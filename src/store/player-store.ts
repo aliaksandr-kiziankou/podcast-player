@@ -1,7 +1,7 @@
 export type Episode = {
     id: string;
     title: string;
-    audioUrl: string;
+    URL: string;
 };
 
 let currentEpisode: Episode | null = null;
