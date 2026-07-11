@@ -1,32 +1,39 @@
 export type Podcast = {
-    id: string;
+    id: number;
     title: string;
-    publisher: string;
+    description: string;
+    author: string;
     image: string;
-    description: string;
 };
 
-export type BestPodcastsResponse = {
-    podcasts: Podcast[];
-    page_number: number;
-    next_page_number: number | null;
-    has_next_page: boolean;
+export type SearchResponse = {
+    status: string;
+    feeds: Podcast[];
+    count: number;
 };
 
-export type ApiEpisode = {
-    id: string;
+export type PodcastDetailsResponse = {
+    status: string;
+    feeds: Podcast;
+};
+
+export type Episode = {
+    id: number;
     title: string;
-    audio: string;
-    audio_length_sec: number;
-    pub_date_ms: number;
     description: string;
+    enclosureUrl: string;
+    duration: number;
+    datePublished: number;
 };
 
-export type PodcastDetails = {
-    id: string;
-    title: string;
-    publisher: string;
-    image: string;
-    description: string;
-    episodes: ApiEpisode[];
+export type EpisodesResponse = {
+    status: string;
+    items: Episode[];
+    count: number;
+};
+
+export type TrendingResponse = {
+  status: string;
+  feeds: Podcast[];
+  count: number;
 };

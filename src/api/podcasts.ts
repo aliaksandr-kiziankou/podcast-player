@@ -1,10 +1,19 @@
 import { apiFetch } from './client';
-import type { BestPodcastsResponse, PodcastDetails } from './types';
+import type { SearchResponse, PodcastDetailsResponse, EpisodesResponse, TrendingResponse } from './types';
 
-export async function getBestPodcasts(page = 1): Promise<BestPodcastsResponse> {
-    return apiFetch<BestPodcastsResponse>(`/best_podcasts?page=${page}`);
+export async function searchPodcasts(query: string): Promise<SearchResponse> {
+    const params = new URLSearchParams({ q: query });
+    return apiFetch<SearchResponse>(`/search/byterm?${params.toString()}`);
 };
 
-export async function getPodcastById(id: string): Promise<PodcastDetails> {
-    return apiFetch<PodcastDetails>(`/podcasts/${id}`)
+export async function getPodcastById(id: number): Promise<PodcastDetailsResponse> {
+    return apiFetch<PodcastDetailsResponse>(`/podcasts/byfeedid?id=${id}`)
+};
+
+export async function getEpisodesByFeedId(id: number): Promise<EpisodesResponse> {
+  return apiFetch<EpisodesResponse>(`/episodes/byfeedid?id=${id}`);
+};
+
+export async function getTrendingPodcasts(): Promise<TrendingResponse> {
+  return apiFetch<TrendingResponse>('/podcasts/trending');
 };
