@@ -33,7 +33,7 @@ export type EpisodesResponse = {
 };
 
 export type TrendingResponse = {
-  status: string;
-  feeds: Podcast[];
-  count: number;
+    status: string;
+    feeds: Podcast[];
+    count: number;
 };

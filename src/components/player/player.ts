@@ -1,11 +1,13 @@
 import { updChanger, togglePlay, getCurrentEpisode, getIsPlaying } from '../../store/player-store';
 import { formatTime } from '../../utils/format-time';
+import { addToPlaylist, removeFromPlaylist, alreadyInPlaylist } from '../../store/playlist-store';
 
 function createPlayer(): HTMLElement {
     const player = document.createElement('div');
     player.className = 'player';
     player.innerHTML = `
         <button class="player__toggle-btn">▶</button>
+        <button class="player__playlist-btn">+ Playlist</button>
         <span class="player__title">Select Episode</span>
         <span class="player__current-time">0:00</span>
         <div class="player__progress-bar">
@@ -22,6 +24,7 @@ export function mountPlayer(): void {
     document.body.appendChild(player);
 
     const toggleBtn = player.querySelector<HTMLButtonElement>('.player__toggle-btn')!;
+    const playlistBtn = player.querySelector<HTMLButtonElement>('.player__playlist-btn')!;
     const title = player.querySelector<HTMLSpanElement>('.player__title')!;
     const audio = player.querySelector<HTMLAudioElement>('.player__audio')!;
     const currentTime = player.querySelector<HTMLSpanElement>('.player__current-time')!;
@@ -44,6 +47,13 @@ export function mountPlayer(): void {
             audio.play();
         } else {
             audio.pause();
+        };
+
+        if (episode) {
+            playlistBtn.style.display = 'inline-block';
+            playlistBtn.textContent = alreadyInPlaylist(episode.id) ? '✓ In Playlist' : '+ Playlist';
+        } else {
+            playlistBtn.style.display = 'none';
         };
     };
 
@@ -73,5 +83,18 @@ export function mountPlayer(): void {
         const percent = clickX / rect.width;
 
         audio.currentTime = percent * audio.duration;
+    });
+
+    playlistBtn.addEventListener('click' , () => {
+        const episode = getCurrentEpisode();
+        if (!episode) return;
+
+        if (alreadyInPlaylist(episode.id)) {
+            removeFromPlaylist(episode.id);
+        } else {
+            addToPlaylist(episode);
+        };
+
+        updatePlayerUI();
     });
 };

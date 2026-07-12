@@ -4,6 +4,7 @@ import { navigate } from '../../router/router';
 import { setEpisode } from '../../store/player-store';
 import { formatDate } from '../../utils/format-date';
 import { formatTime } from '../../utils/format-time';
+import { addToPlaylist, removeFromPlaylist, alreadyInPlaylist } from '../../store/playlist-store';
 
 export async function renderPodcastDetailsPage(container: HTMLElement, params: Record<string, string>): Promise<void> {
     const feedId = Number(params.id);
@@ -50,14 +51,34 @@ function createEpisodeItem(episode: ApiEpisode): HTMLElement {
     item.innerHTML = `
         <h3 class="episode-item__title">${episode.title}</h3>
         <p class="episode-item__meta">${formatDate(episode.datePublished)} · ${formatTime(episode.duration)} </p>
+        <button class="episode-item__playlist-btn">${alreadyInPlaylist(String(episode.id)) ? '✓ In Playlist' : '+ Playlist'}</button>
     `;
 
-    item.addEventListener('click' , () => {
+    const title = item.querySelector<HTMLElement>('.episode-item__title')!;
+    title.addEventListener('click', () => {
         setEpisode({
             id: String(episode.id),
             title: episode.title,
             URL: episode.enclosureUrl,
         });
+    });
+
+    const playlistBtn = item.querySelector<HTMLButtonElement>('.episode-item__playlist-btn')!;
+    playlistBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+
+        const episodeId = String(episode.id);
+        if (alreadyInPlaylist(episodeId)) {
+            removeFromPlaylist(episodeId);
+            playlistBtn.textContent = '+ Playlist';
+        } else {
+            addToPlaylist({
+                id: episodeId,
+                title: episode.title,
+                URL: episode.enclosureUrl,
+            });
+            playlistBtn.textContent = '✓ In Playlist';
+        }
     });
 
     return item;
