@@ -1,6 +1,7 @@
 import { updChanger, togglePlay, getCurrentEpisode, getIsPlaying } from '../../store/player-store';
 import { formatTime } from '../../utils/format-time';
 import { addToPlaylist, removeFromPlaylist, alreadyInPlaylist } from '../../store/playlist-store';
+import { navigate } from '../../router/router'
 
 function createPlayer(): HTMLElement {
     const player = document.createElement('div');
@@ -16,6 +17,11 @@ function createPlayer(): HTMLElement {
         <span class="player__duration">0:00</span>
         <audio class="player__audio"></audio>
     `;
+    const goToPlaylistBtn = document.createElement('button');
+    goToPlaylistBtn.textContent = 'Playlist';
+    goToPlaylistBtn.addEventListener('click', () => navigate('/playlist'));
+    player.appendChild(goToPlaylistBtn);
+
     return player;
 };
 
