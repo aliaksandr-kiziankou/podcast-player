@@ -1,7 +1,8 @@
 import { updChanger, togglePlay, getCurrentEpisode, getIsPlaying } from '../../store/player-store';
 import { formatTime } from '../../utils/format-time';
 import { addToPlaylist, removeFromPlaylist, alreadyInPlaylist } from '../../store/playlist-store';
-import { navigate } from '../../router/router'
+import { navigate } from '../../router/router';
+import {getItem, setItem} from '../../utils/local-storage';
 
 function createPlayer(): HTMLElement {
     const player = document.createElement('div');
@@ -37,6 +38,8 @@ export function mountPlayer(): void {
     const durationEl = player.querySelector<HTMLSpanElement>('.player__duration')!;
     const progressBar = player.querySelector<HTMLDivElement>('.player__progress-bar')!;
     const progressFill = player.querySelector<HTMLDivElement>('.player__progress-fill')!;
+    const positionPLay = 'playback-positions';
+    let positions: Record<string, number> = getItem(positionPLay) ?? {};
 
     function updatePlayerUI(): void {
         const episode = getCurrentEpisode();
@@ -47,6 +50,11 @@ export function mountPlayer(): void {
 
         if (episode && audio.src !== episode.URL) {
             audio.src = episode.URL;
+
+            const savedPosition = positions[episode.id];
+            if (savedPosition) {
+                audio.currentTime = Math.max(savedPosition - 10, 0);
+            };
         };
 
         if(isPLaying) {
@@ -72,6 +80,12 @@ export function mountPlayer(): void {
 
         const percent = duration > 0 ? (current / duration) * 100 : 0;
         progressFill.style.width = `${percent}%`;
+
+        const episode = getCurrentEpisode();
+        if (episode) {
+            positions[episode.id] = current;
+            setItem(positionPLay, positions);
+        };
     };
 
     updChanger(updatePlayerUI);
