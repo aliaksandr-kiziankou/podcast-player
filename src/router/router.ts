@@ -36,6 +36,7 @@ async function renderCurrentRoute() {
 };
 
 export function navigate(path: string): void {
+
     if (location.pathname === path) return;
 
     history.pushState({}, '', path);

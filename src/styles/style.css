@@ -1,7 +1,6 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     gap: 15px;
@@ -9,7 +8,49 @@ body {
     padding-bottom: 70px;
 }
 
+/*
+* {
+    border: outset 1px red;
+}
+*/
+
+.loader {
+    font-size: 30px;
+    background: rgba(85, 174, 106, 0.616);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+#app {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 50px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.back-btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+}
+
 /*----------------------------------Landing Page----------------------------------*/
+
+.results-container {
+    max-width: 1380px;
+    width: 100%;
+    display: flex;
+}
 
 .podcast-card {
     width: 250px;
@@ -28,12 +69,12 @@ body {
 }
 
 .podcast-card:hover {
-    scale: 1.05;
-    box-shadow: 0 0 25px rgba(142, 89, 68, 0.24);
+    box-shadow: 0 0 25px rgba(23, 20, 19, 0.689);
 }
 
 .podcast-list {
     display: flex;
+    justify-content: center;
     gap: 20px 30px;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -58,6 +99,14 @@ body {
     font-size: 12px;
 }
 
+.search-input {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid rgba(210, 176, 123, 0.795);
+    background-color: rgba(255, 255, 255, 0.952);
+}
+
 /*-------------------------------------Player-------------------------------------*/
 
 .player {
@@ -70,6 +119,10 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.player__toggle-btn {
+    cursor: pointer;
 }
 
 .player__progress-bar {
@@ -89,4 +142,61 @@ body {
   background-color: #504f4f;
   border-radius: 3px;
   width: 0%;
+}
+
+/*----------------------------------Podcast Details Page----------------------------------*/
+
+.podcast-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.episode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.episode-item {
+    border: 2px solid rgba(183, 172, 139, 0.813);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.episode-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.338);
+}
+
+.episode-item__playlist-btn {
+    cursor: pointer;
+}
+
+/*-------------------------------------Playlist Page-------------------------------------*/
+
+.playlist-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.playlist-item {
+    padding: 10px;
+    border: 2px solid rgba(90, 93, 84, 0.315);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.playlist-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.338);
+}
+
+.playlist-item__remove-btn {
+    cursor: pointer;
 }

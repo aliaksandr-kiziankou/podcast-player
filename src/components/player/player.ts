@@ -17,12 +17,21 @@ function createPlayer(): HTMLElement {
         </div>
         <span class="player__duration">0:00</span>
         <audio class="player__audio"></audio>
+        <button class="player__go-to-playlist-btn">Playlist</button>
+
     `;
+    /*
     const goToPlaylistBtn = document.createElement('button');
     goToPlaylistBtn.textContent = 'Playlist';
     goToPlaylistBtn.addEventListener('click', () => navigate('/playlist'));
     player.appendChild(goToPlaylistBtn);
+    */
 
+    const goToPlaylistBtn = player.querySelector<HTMLButtonElement>('.player__go-to-playlist-btn')!;
+    goToPlaylistBtn.addEventListener('click', () => {
+        navigate('/playlist')
+    });
+    
     return player;
 };
 
