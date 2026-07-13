@@ -1,5 +1,14 @@
 import { ROUTES, type RouteParams, type Route } from './routes';
 
+const BASE_PATH = import.meta.env.BASE_URL;
+
+function getRelativePath(pathname: string): string {
+  if (BASE_PATH !== '/' && pathname.startsWith(BASE_PATH)) {
+    return '/' + pathname.slice(BASE_PATH.length);
+  }
+  return pathname;
+};
+
 let containerElement: HTMLElement;
 
 function matchRoute(pathname: string): { route: Route; params: RouteParams } | null {
@@ -26,7 +35,8 @@ function matchRoute(pathname: string): { route: Route; params: RouteParams } | n
 };
 
 async function renderCurrentRoute() {
-    const match = matchRoute(location.pathname);
+    const relativePath = getRelativePath(location.pathname);
+    const match = matchRoute(relativePath);
 
     if (match) {
         await match.route.render(containerElement, match.params);
@@ -36,10 +46,11 @@ async function renderCurrentRoute() {
 };
 
 export function navigate(path: string): void {
+    const fullPath = BASE_PATH !== '/' ? BASE_PATH.slice(0, -1) + path : path;
 
     if (location.pathname === path) return;
 
-    history.pushState({}, '', path);
+    history.pushState({}, '', fullPath);
 
     renderCurrentRoute();
 };

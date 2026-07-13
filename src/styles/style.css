@@ -19,6 +19,7 @@ body {
     background: rgba(85, 174, 106, 0.616);
     padding: 40px;
     border-radius: 10px;
+    margin: 0 auto;
 }
 
 #app {
@@ -144,6 +145,18 @@ body {
   width: 0%;
 }
 
+.player__go-to-playlist-btn {
+    width: 90px;
+    height: 30px;
+}
+
+.player__loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /*----------------------------------Podcast Details Page----------------------------------*/
 
 .podcast-header {
@@ -151,33 +164,50 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .episode-list {
+    width: 100%;
+    padding: 0 150px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .episode-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border: 2px solid rgba(183, 172, 139, 0.813);
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
     transition: all 0.4s ease;
+    background: #d8e7d731;
 }
 
 .episode-item:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.338);
 }
 
+.episode__info {
+    max-width: 85%;
+}
+
 .episode-item__playlist-btn {
     cursor: pointer;
+    width: 90px;
+    min-height: 30px;
 }
 
 /*-------------------------------------Playlist Page-------------------------------------*/
 
 .playlist-list {
+    margin-top: 50px;
+    padding: 0 150px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,7 +216,11 @@ body {
 }
 
 .playlist-item {
-    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
     border: 2px solid rgba(90, 93, 84, 0.315);
     border-radius: 10px;
     cursor: pointer;

@@ -1,4 +1,4 @@
-import { updChanger, togglePlay, getCurrentEpisode, getIsPlaying } from '../../store/player-store';
+import { updChanger, togglePlay, getCurrentEpisode, getIsPlaying, getIsLoading, setLoading } from '../../store/player-store';
 import { formatTime } from '../../utils/format-time';
 import { addToPlaylist, removeFromPlaylist, alreadyInPlaylist } from '../../store/playlist-store';
 import { navigate } from '../../router/router';
@@ -11,6 +11,7 @@ function createPlayer(): HTMLElement {
         <button class="player__toggle-btn">▶</button>
         <button class="player__playlist-btn">+ Playlist</button>
         <span class="player__title">Select Episode</span>
+        <span class="player__loader"></span>
         <span class="player__current-time">0:00</span>
         <div class="player__progress-bar">
             <div class="player__progress-fill"></div>
@@ -27,10 +28,7 @@ function createPlayer(): HTMLElement {
     player.appendChild(goToPlaylistBtn);
     */
 
-    const goToPlaylistBtn = player.querySelector<HTMLButtonElement>('.player__go-to-playlist-btn')!;
-    goToPlaylistBtn.addEventListener('click', () => {
-        navigate('/playlist')
-    });
+    
     
     return player;
 };
@@ -38,6 +36,12 @@ function createPlayer(): HTMLElement {
 export function mountPlayer(): void {
     const player = createPlayer();
     document.body.appendChild(player);
+
+    const goToPlaylistBtn = player.querySelector<HTMLButtonElement>('.player__go-to-playlist-btn')!;
+    goToPlaylistBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        navigate('/playlist')
+    });
 
     const toggleBtn = player.querySelector<HTMLButtonElement>('.player__toggle-btn')!;
     const playlistBtn = player.querySelector<HTMLButtonElement>('.player__playlist-btn')!;
@@ -47,12 +51,16 @@ export function mountPlayer(): void {
     const durationEl = player.querySelector<HTMLSpanElement>('.player__duration')!;
     const progressBar = player.querySelector<HTMLDivElement>('.player__progress-bar')!;
     const progressFill = player.querySelector<HTMLDivElement>('.player__progress-fill')!;
+    const playerLoader = player.querySelector<HTMLSpanElement>('.player__loader')!;
     const positionPLay = 'playback-positions';
     let positions: Record<string, number> = getItem(positionPLay) ?? {};
 
     function updatePlayerUI(): void {
         const episode = getCurrentEpisode();
         const isPLaying = getIsPlaying();
+        const isLoading = getIsLoading();
+
+        playerLoader.textContent = isLoading ? '⏳ Loading...' : '';
 
         title.textContent = episode ? episode.title : 'No episode selected';
         toggleBtn.textContent = isPLaying ? '⏸' : '▶';
@@ -67,7 +75,11 @@ export function mountPlayer(): void {
         };
 
         if(isPLaying) {
-            audio.play();
+            audio.play().catch((error) => {
+                if (error.name !== 'AbortError'){
+                    console.error('PLayback error:', error);
+                };
+            });
         } else {
             audio.pause();
         };
@@ -85,7 +97,7 @@ export function mountPlayer(): void {
         const duration = audio.duration || 0;
 
         currentTime.textContent = formatTime(current);
-        durationEl.textContent = formatTime(current);
+        durationEl.textContent = formatTime(duration);
 
         const percent = duration > 0 ? (current / duration) * 100 : 0;
         progressFill.style.width = `${percent}%`;
@@ -105,6 +117,10 @@ export function mountPlayer(): void {
     });
 
     audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('loadstart', () => setLoading(true));
+    audio.addEventListener('waiting', () => setLoading(true));
+    audio.addEventListener('canplay', () => setLoading(false));
+    audio.addEventListener('playing', () => setLoading(false));
 
     progressBar.addEventListener('click' , (event) => {
         const rect = progressBar.getBoundingClientRect();

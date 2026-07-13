@@ -49,13 +49,14 @@ function createEpisodeItem(episode: ApiEpisode): HTMLElement {
     const item = document.createElement('div');
     item.className = 'episode-item';
     item.innerHTML = `
-        <h3 class="episode-item__title">${episode.title}</h3>
-        <p class="episode-item__meta">${formatDate(episode.datePublished)} · ${formatTime(episode.duration)} </p>
+        <div class="episode__info">
+            <h3 class="episode-item__title">${episode.title}</h3>
+            <p class="episode-item__meta">${formatDate(episode.datePublished)} ; duration: ${formatTime(episode.duration)} </p>
+        </div>
         <button class="episode-item__playlist-btn">${alreadyInPlaylist(String(episode.id)) ? '✓ In Playlist' : '+ Playlist'}</button>
     `;
 
-    const title = item.querySelector<HTMLElement>('.episode-item__title')!;
-    title.addEventListener('click', () => {
+    item.addEventListener('click', () => {
         setEpisode({
             id: String(episode.id),
             title: episode.title,
