@@ -1,0 +1,236 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    gap: 15px;
+    background: rgba(231, 227, 219, 0.299);
+    padding-bottom: 70px;
+}
+
+/*
+* {
+    border: outset 1px red;
+}
+*/
+
+.loader {
+    font-size: 30px;
+    background: rgba(85, 174, 106, 0.616);
+    padding: 40px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+#app {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 50px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.back-btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+}
+
+/*----------------------------------Landing Page----------------------------------*/
+
+.results-container {
+    max-width: 1380px;
+    width: 100%;
+    display: flex;
+}
+
+.podcast-card {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.098);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(25, 40, 53, 0.135);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    padding: 10px;
+}
+
+.podcast-card:hover {
+    box-shadow: 0 0 25px rgba(23, 20, 19, 0.689);
+}
+
+.podcast-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px 30px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.podcast-card__image {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 5px;
+}
+
+.podcast-header__image {
+    width: 500px;
+    height: 500px;
+}
+
+.podcast-card__title {
+    font-size: 12px;
+}
+
+.podcast-card__publisher {
+    font-size: 12px;
+}
+
+.search-input {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid rgba(210, 176, 123, 0.795);
+    background-color: rgba(255, 255, 255, 0.952);
+}
+
+/*-------------------------------------Player-------------------------------------*/
+
+.player {
+    height: 75px;
+    width: 100%;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    background: rgba(210, 216, 215, 0.97);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.player__toggle-btn {
+    cursor: pointer;
+}
+
+.player__progress-bar {
+  position: relative;
+  width: 95vw;
+  height: 6px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.player__progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #504f4f;
+  border-radius: 3px;
+  width: 0%;
+}
+
+.player__go-to-playlist-btn {
+    width: 90px;
+    height: 30px;
+}
+
+.player__loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*----------------------------------Podcast Details Page----------------------------------*/
+
+.podcast-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.episode-list {
+    width: 100%;
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.episode-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgba(183, 172, 139, 0.813);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    background: #d8e7d731;
+}
+
+.episode-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.338);
+}
+
+.episode__info {
+    max-width: 85%;
+}
+
+.episode-item__playlist-btn {
+    cursor: pointer;
+    width: 90px;
+    min-height: 30px;
+}
+
+/*-------------------------------------Playlist Page-------------------------------------*/
+
+.playlist-list {
+    margin-top: 50px;
+    padding: 0 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.playlist-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid rgba(90, 93, 84, 0.315);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.playlist-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.338);
+}
+
+.playlist-item__remove-btn {
+    cursor: pointer;
+}
