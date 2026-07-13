@@ -40,8 +40,7 @@ function createPlaylistItem(episode: { id: string; title: string; URL: string })
         <button class="playlist-item__remove-btn">Remove</button>
     `;
 
-    const title = item.querySelector<HTMLElement>('.playlist-item__title')!;
-    title.addEventListener('click', () => {
+    item.addEventListener('click', () => {
         setEpisode(episode);
     });
 
