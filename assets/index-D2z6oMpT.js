@@ -10,7 +10,8 @@
         <div class="podcast-header">
             <img src="${t.image}" alt="${t.title}" class="podcast-header__image" />
             <h1>${t.title}</h1>
-            <p>${t.author}</p>
+            <p>Author: ${t.author}</p>
+            <p>Description: ${t.description}</p>
         </div>
         <div class="episode-list"></div>
     `,e.querySelector(`.back-btn`)?.addEventListener(`click`,()=>X(`/`));let r=e.querySelector(`.episode-list`);n.forEach(e=>{let t=V(e);r.appendChild(t)})}function V(e){let t=document.createElement(`div`);t.className=`episode-item`,t.innerHTML=`
